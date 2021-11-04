@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+from secrets import URL,USERNAME,PASSWORD
 
-url = 'https://www2.nm.cs.uec.ac.jp/wiki/wiki.cgi?action=LIST'
-res=requests.get(url)
+res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
 print(res)
