@@ -1,24 +1,30 @@
 from bs4 import BeautifulSoup
 import requests
-from secrets import URL,USERNAME,PASSWORD
 
-res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
-# print(res)
+def detect_updates():
+  from secrets import URL,USERNAME,PASSWORD
 
-soup=BeautifulSoup(res.text, "html.parser")
-# print(soup)
+  res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
+  # print(res)
 
-new_elem=str(soup.select("li")[:5])
+  soup=BeautifulSoup(res.text, "html.parser")
+  # print(soup)
 
-try:
-  with open("old_elem.txt") as f:
-    old_elem=f.read()
-except IOError:
-  old_elem=""
+  new_elem=str(soup.select("li")[:5])
 
-if old_elem==new_elem:
-  print("No change")
-else:
-  with open("old_elem.txt", "w") as f:
-    f.write(new_elem)
-  print("There are some change")
+  try:
+    with open("old_elem.txt") as f:
+      old_elem=f.read()
+  except IOError:
+    old_elem=""
+
+  if old_elem==new_elem:
+    print("No change")
+    return False
+  else:
+    with open("old_elem.txt", "w") as f:
+      f.write(new_elem)
+    print("There are some changes")
+    return True
+
+detect_updates()
