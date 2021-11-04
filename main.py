@@ -8,7 +8,7 @@ res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
 soup=BeautifulSoup(res.text, "html.parser")
 # print(soup)
 
-new_elem=str(soup.select(".body"))
+new_elem=str(soup.select("li")[:5])
 
 try:
   with open("old_elem.txt") as f:
