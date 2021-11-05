@@ -27,4 +27,10 @@ def detect_updates():
     print("There are some changes")
     return True
 
-detect_updates()
+from slackPost import post
+
+def lambda_handler(event, context):
+  if detect_updates():
+    post(1)
+  else:
+    post(0)
