@@ -29,10 +29,11 @@ def detect_updates():
 
 from slackPost import post
 
-def lambda_handler(event, context):
+def main():
   if detect_updates():
     post(1)
   else:
     post(0)
 
-lambda_handler(None, None)
+if __name__ == "__main__":
+  main()
