@@ -34,3 +34,5 @@ def lambda_handler(event, context):
     post(1)
   else:
     post(0)
+
+lambda_handler(None, None)
