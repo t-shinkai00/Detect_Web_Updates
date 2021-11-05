@@ -1,4 +1,4 @@
-#!/Users/tak2/develop/Personal/detect-web-updates/.detect-web-updates/bin/python3.9
+#!/Users/tak2/develop/Personal/detect-web-updates/.detect-web-updates/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
