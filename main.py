@@ -31,9 +31,7 @@ from slackPost import post
 
 def main():
   if detect_updates():
-    post(1)
-  else:
-    post(0)
+    post()
 
 if __name__ == "__main__":
   main()
