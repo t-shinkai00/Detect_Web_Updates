@@ -1,6 +1,13 @@
+# 鍵情報
 secrets.py
+
+# キャッシュ
 __pycache__/
+
+# 取得した要素情報
 old_elem.txt
+
+# venv環境
 .detect-web-updates/
 
 # Modules
