@@ -1,4 +1,3 @@
-import json
 import boto3
 
 # バケット名,オブジェクト名
