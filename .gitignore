@@ -5,7 +5,7 @@ secrets.py
 __pycache__/
 
 # 取得した要素情報
-old_elem.txt
+*.txt
 
 # venv環境
 .detect-web-updates/
