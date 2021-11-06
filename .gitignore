@@ -28,6 +28,8 @@ idna/
 idna-3.3.dist-info/
 jmespath/
 jmespath-0.10.0.dist-info/
+pathlib.py
+pathlib-1.0.1-py3.9.egg-info/
 python_dateutil-2.8.2.dist-info/
 requests/
 requests-2.26.0.dist-info/
