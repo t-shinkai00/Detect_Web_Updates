@@ -17,6 +17,6 @@ def writeS3(input):
   data=input.encode("utf-8")
   obj.put(Body=bytearray(data))  # データを書き込む
 
-print(readS3())
-writeS3("こんにちわ")
-print(readS3())
+# print(readS3())
+# writeS3("hello world")
+# print(readS3())
