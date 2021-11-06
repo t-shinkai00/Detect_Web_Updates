@@ -3,6 +3,7 @@ import requests
 
 def detect_updates():
   from secrets import URL,USERNAME,PASSWORD
+  from ReadWriteS3 import readS3,writeS3
 
   res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
   # print(res)
@@ -13,8 +14,7 @@ def detect_updates():
   new_elem=str(soup.select("li")[:5])
 
   try:
-    with open("old_elem.txt") as f:
-      old_elem=f.read()
+    old_elem=readS3()
   except IOError:
     old_elem=""
 
@@ -22,8 +22,7 @@ def detect_updates():
     print("No change")
     return False
   else:
-    with open("old_elem.txt", "w") as f:
-      f.write(new_elem)
+    writeS3(new_elem)
     print("There are some changes")
     return True
 
