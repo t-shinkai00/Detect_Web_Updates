@@ -6,7 +6,7 @@ def detect_updates():
   from ReadWriteS3 import readS3,writeS3
 
   res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
-  # print(res)
+  print(res.status_code)
 
   soup=BeautifulSoup(res.text, "html.parser")
   # print(soup)
@@ -20,17 +20,19 @@ def detect_updates():
 
   if old_elem==new_elem:
     print("No change")
-    return False
   else:
     writeS3(new_elem)
-    print("There are some changes")
-    return True
+    if res.status_code==200:
+      print("There are some changes")
+      post(res.status_code)
+    else:
+      print(f"Error: {res.status_code}")
+      post(res.status_code)
 
 from slackPost import post
 
-def main():
-  if detect_updates():
-    post()
+def main(event, lambda_context):
+  detect_updates()
 
 if __name__ == "__main__":
-  main()
+  main(event, lambda_context)
