@@ -5,7 +5,7 @@ secrets.py
 *.pyc
 
 # venv環境
-.detect-web-updates/
+.venv/
 
 # Modules
 beautifulsoup4-4.10.0.dist-info/
