@@ -2,7 +2,7 @@
 secrets.py
 
 # キャッシュ
-__pycache__/
+*.pyc
 
 # 取得した要素情報
 *.txt
