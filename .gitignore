@@ -4,9 +4,6 @@ secrets.py
 # キャッシュ
 *.pyc
 
-# 取得した要素情報
-*.txt
-
 # venv環境
 .detect-web-updates/
 
