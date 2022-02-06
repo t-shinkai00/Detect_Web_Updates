@@ -2,6 +2,7 @@
 secrets.py
 
 # キャッシュ
+__pycache__/
 *.pyc
 
 # venv環境
