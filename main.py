@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import re
 
 def detect_updates():
   from secrets import URL,USERNAME,PASSWORD
@@ -11,7 +12,16 @@ def detect_updates():
   soup=BeautifulSoup(res.text, "html.parser")
   # print(soup)
 
-  new_elem=str(soup.select("li")[:5])
+  changed = []
+  for i, el in enumerate(soup.select("li")):
+    line = str(el)
+    # print(line)
+    name = re.search(r'">(.+)</a>', line).group(1)
+    time = re.findall(r"\d+", re.search(r'</a> - (.+)</li>', line).group(1))
+    print(name, time)
+    # print(name)
+    if i == 5:
+      break
 
   try:
     old_elem=readS3()
