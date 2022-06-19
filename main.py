@@ -4,7 +4,7 @@ import re
 
 def detect_updates():
   from secrets import URL,USERNAME,PASSWORD
-  from ReadWriteS3 import readS3,writeS3
+  # from ReadWriteS3 import readS3,writeS3
 
   res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
   print(res.status_code)
@@ -23,26 +23,29 @@ def detect_updates():
     if i == 5:
       break
 
-  try:
-    old_elem=readS3()
-  except IOError:
-    old_elem=""
+  # try:
+  #   old_elem=readS3()
+  # except IOError:
+  #   old_elem=""
 
-  if old_elem==new_elem:
-    print("No change")
-  else:
-    writeS3(new_elem)
-    if res.status_code==200:
-      print("There are some changes")
-      post(res.status_code)
-    else:
-      print(f"Error: {res.status_code}")
-      post(res.status_code)
+  # if old_elem==new_elem:
+  #   print("No change")
+  # else:
+  #   writeS3(new_elem)
+  #   if res.status_code==200:
+  #     print("There are some changes")
+  #     post(res.status_code)
+  #   else:
+  #     print(f"Error: {res.status_code}")
+  #     post(res.status_code)
 
-from slackPost import post
+# from slackPost import post
+# import datetime
 
-def main(event, lambda_context):
+# def main(event, lambda_context):
+def main():
   detect_updates()
 
 if __name__ == "__main__":
-  main(event, lambda_context)
+  # main(event, lambda_context)
+  main()
