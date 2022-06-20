@@ -17,23 +17,25 @@ def detect_updates():
   res=requests.get(url=ENDPOINT, auth=(USERNAME,PASSWORD))
   # print(res.status_code)
 
-  soup=BeautifulSoup(res.text, "html.parser")
-  # print(soup)
-
   updated = []
-  for el in soup.select("li"):
-    line = str(el)
-    # print(line)
-    name = re.search(r'">(.+)</a>', line).group(1)
-    nums = re.findall('[0-9]+', re.search(r'</a> - (.+)</li>', line).group(1))
-    # print(name, nums)
-    nums = [int(i) for i in nums]
-    time = datetime.datetime(*nums)
-    if time < datetime.datetime(2022, 6, 10, 0, 0, 0):
-      break
-    updated.append(name)
-    # print(name)
-  print(updated)
+  if res.status_code == 200:
+    soup=BeautifulSoup(res.text, "html.parser")
+    # print(soup)
+
+    for el in soup.select("li"):
+      line = str(el)
+      # print(line)
+      name = re.search(r'">(.+)</a>', line).group(1)
+      nums = re.findall('[0-9]+', re.search(r'</a> - (.+)</li>', line).group(1))
+      nums = [int(i) for i in nums]
+      time = datetime.datetime(*nums)
+      url = URL+urllib.parse.quote(name)
+      page = Page(name, url, time)
+      if time < datetime.datetime(2022, 6, 10, 0, 0, 0):
+        break
+      updated.append(page)
+      # print(name)
+  return updated, res.status_code
 
   # try:
   #   old_elem=readS3()
