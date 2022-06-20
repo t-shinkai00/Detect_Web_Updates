@@ -77,7 +77,9 @@ def post(updated, status):
 
 # def main(event, lambda_context):
 def main():
-  detect_updates()
+  updated, status = detect_updates()
+  if status == 200 and len(updated) == 0: print("No change.")
+  else: post(updated, status)
 
 if __name__ == "__main__":
   # main(event, lambda_context)
