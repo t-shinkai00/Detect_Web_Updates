@@ -37,24 +37,43 @@ def detect_updates():
       # print(name)
   return updated, res.status_code
 
-  # try:
-  #   old_elem=readS3()
-  # except IOError:
-  #   old_elem=""
 
-  # if old_elem==new_elem:
-  #   print("No change")
-  # else:
-  #   writeS3(new_elem)
-  #   if res.status_code==200:
-  #     print("There are some changes")
-  #     post(res.status_code)
-  #   else:
-  #     print(f"Error: {res.status_code}")
-  #     post(res.status_code)
+import requests, json
+from secrets import WEBHOOK_URL
 
-# from slackPost import post
-# import datetime
+def post(updated, status):
+  if status != 200:
+    print(f"Error: {status}")
+    data = json.dumps(
+      {
+        'text': f'wikiから{status}番のレスポンスが返りました。サーバーが落ちている可能性があります。',  #通知内容
+        'link_names': 1,  #名前をリンク化
+      }
+    )
+  else:
+    print("There are some changes")
+    contents = "研究室wikiの変更を検知しました。\n"  #通知内容
+    size = len(updated)
+    for i, el in enumerate(updated):
+      if i != size - 1:
+        contents += f"• <{el.url}|{el.name}> ({el.updated})\n"
+    print(contents)
+    data = json.dumps(
+    {
+      'link_names': 1,  #名前をリンク化
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": contents,
+          }
+        },
+      ]
+    }
+    )
+  requests.post(url=WEBHOOK_URL,data=data)
+
 
 # def main(event, lambda_context):
 def main():
