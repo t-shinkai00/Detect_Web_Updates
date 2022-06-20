@@ -14,8 +14,8 @@ class Page():
 def detect_updates():
   from secrets import ENDPOINT, USERNAME, PASSWORD, URL
 
-  res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
-  print(res.status_code)
+  res=requests.get(url=ENDPOINT, auth=(USERNAME,PASSWORD))
+  # print(res.status_code)
 
   soup=BeautifulSoup(res.text, "html.parser")
   # print(soup)
