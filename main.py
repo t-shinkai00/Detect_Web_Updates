@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import re
+import datetime
 
 def detect_updates():
   from secrets import URL,USERNAME,PASSWORD
@@ -12,16 +13,20 @@ def detect_updates():
   soup=BeautifulSoup(res.text, "html.parser")
   # print(soup)
 
-  changed = []
-  for i, el in enumerate(soup.select("li")):
+  updated = []
+  for el in soup.select("li"):
     line = str(el)
     # print(line)
     name = re.search(r'">(.+)</a>', line).group(1)
-    time = re.findall(r"\d+", re.search(r'</a> - (.+)</li>', line).group(1))
-    print(name, time)
-    # print(name)
-    if i == 5:
+    nums = re.findall('[0-9]+', re.search(r'</a> - (.+)</li>', line).group(1))
+    # print(name, nums)
+    nums = [int(i) for i in nums]
+    time = datetime.datetime(*nums)
+    if time < datetime.datetime(2022, 6, 10, 0, 0, 0):
       break
+    updated.append(name)
+    # print(name)
+  print(updated)
 
   # try:
   #   old_elem=readS3()
