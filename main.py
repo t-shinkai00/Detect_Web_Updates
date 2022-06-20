@@ -12,8 +12,7 @@ class Page():
 
 
 def detect_updates():
-  from secrets import URL,USERNAME,PASSWORD
-  # from ReadWriteS3 import readS3,writeS3
+  from secrets import ENDPOINT, USERNAME, PASSWORD, URL
 
   res=requests.get(url=URL, auth=(USERNAME,PASSWORD))
   print(res.status_code)
