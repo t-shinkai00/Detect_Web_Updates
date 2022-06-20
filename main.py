@@ -2,6 +2,14 @@ from bs4 import BeautifulSoup
 import requests
 import re
 import datetime
+import urllib.parse
+
+class Page():
+  def __init__(self, name, url, time):
+    self.name = name
+    self.url = url
+    self.updated = time
+
 
 def detect_updates():
   from secrets import URL,USERNAME,PASSWORD
