@@ -75,6 +75,17 @@ def post(updated, status):
     )
   requests.post(url=WEBHOOK_URL,data=data)
 
+import boto3
+def update_environ(arn, newDate):
+    lambda_client = boto3.client('lambda')
+    lambda_client.update_function_configuration(
+        FunctionName=arn,
+        Environment={
+            'Variables': {
+                'Date': f"{newDate.year}-{newDate.month}-{newDate.day} {newDate.hour}:{newDate.minute}:{newDate.second}",
+            }
+        }
+    )
 
 # def main(event, lambda_context):
 def main():
