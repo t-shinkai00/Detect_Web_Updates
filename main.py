@@ -83,6 +83,7 @@ def update_environ(arn, newDate):
         Environment={
             'Variables': {
                 'Date': f"{newDate.year}-{newDate.month}-{newDate.day} {newDate.hour}:{newDate.minute}:{newDate.second}",
+                'TZ' : "Asia/Tokyo",
             }
         }
     )
