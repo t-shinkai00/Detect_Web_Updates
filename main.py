@@ -58,7 +58,7 @@ def post(updated, status):
     for i, el in enumerate(updated):
       if i != size - 1:
         contents += f"• <{el.url}|{el.name}> ({el.updated})\n"
-    print(contents)
+    # print(contents)
     data = json.dumps(
     {
       'link_names': 1,  #名前をリンク化
