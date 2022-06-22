@@ -32,6 +32,7 @@ def detect_updates(newDate):
       time = datetime.datetime(*nums)
       url = URL+urllib.parse.quote(name)
       page = Page(name, url, time)
+      print(f"checking: {oldDate} < time < {newDate}")
       if oldDate < time <= newDate:
         updated.append(page)
       else:
