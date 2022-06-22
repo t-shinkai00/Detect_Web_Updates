@@ -12,6 +12,8 @@ import urllib.parse
 # import os
 def detect_updates(newDate):
   from secrets import ENDPOINT, USERNAME, PASSWORD, URL
+  oldDate = datetime.datetime.strptime("2022-6-20 0:0:0", "%Y-%m-%d %H:%M:%S")
+  # oldDate = datetime.datetime.strptime(os.environ["Date"], "%Y-%m-%d %H:%M:%S")
 
   res=requests.get(url=ENDPOINT, auth=(USERNAME,PASSWORD))
   # print(res.status_code)
