@@ -87,12 +87,10 @@ def update_environ(arn, newDate):
         }
     )
 
-# def main(event, lambda_context):
-def main():
-  updated, status = detect_updates()
-  if status == 200 and len(updated) == 0: print("No change.")
-  else: post(updated, status)
-
-if __name__ == "__main__":
-  # main(event, lambda_context)
-  main()
+# def lambda_handler(event, context):
+from secrets import FUNCTION_ARN
+newDate = datetime.datetime.now()
+updated, status = detect_updates(newDate)
+if status == 200 and len(updated) == 0: print("No change.")
+else: post(updated, status)
+update_environ(FUNCTION_ARN, newDate)
