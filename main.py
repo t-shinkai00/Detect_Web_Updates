@@ -1,17 +1,16 @@
-from bs4 import BeautifulSoup
-import requests
-import re
-import datetime
-import urllib.parse
-
 class Page():
   def __init__(self, name, url, time):
     self.name = name
     self.url = url
     self.updated = time
 
-
-def detect_updates():
+from bs4 import BeautifulSoup
+import requests
+import re
+import datetime
+import urllib.parse
+# import os
+def detect_updates(newDate):
   from secrets import ENDPOINT, USERNAME, PASSWORD, URL
 
   res=requests.get(url=ENDPOINT, auth=(USERNAME,PASSWORD))
@@ -40,7 +39,6 @@ def detect_updates():
 
 import requests, json
 from secrets import WEBHOOK_URL
-
 def post(updated, status):
   if status != 200:
     print(f"Error: {status}")
